@@ -50,7 +50,7 @@ def train(traindataloader,valdataloader):
 
             # append
             train_loss.append(loss.item())
-            acc_1 = get_dice_arr(out, label.to(device))
+            acc_1 = get_accuracy(out, label.to(device))
             train_dsc.append(acc_1.mean(axis=0).detach().cpu().numpy())
 
             if (batch_idx % log_interval) == 0:
