@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import torch
 from torch import nn
 from torch.utils.tensorboard import SummaryWriter
@@ -14,7 +16,7 @@ def train(traindataloader,valdataloader):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # optimiser = torch.optim.RMSprop(model.parameters(), lr = lr, weight_decay = 1e-8, momentum=0.9)
     # TODO: you can try with different loss function
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss(weight=torch.tensor([1.,100.,100.]))
     model = model.to(device)
     criterion = criterion.to(device)
 
@@ -32,7 +34,7 @@ def train(traindataloader,valdataloader):
 
     # New: savining your model depending on your best val score
     best_valid_loss = float('inf')
-    ckptFileName = 'UNet_hippocampus_best.pt'
+    ckptFileName = 'UNet_hippocampus_best'+ str(int(datetime.timestamp(datetime.now()))) +'.pt'
     for epoch in range(epochs):
         train_loss, valid_loss, train_dsc, val_dsc = [], [], [], []
 
