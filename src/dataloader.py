@@ -3,6 +3,7 @@ import os
 
 import numpy as np
 
+import torch
 import torchio as tio
 from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
@@ -33,11 +34,13 @@ class mySegmentationData(object):
         # resize
         transform = tio.CropOrPad(self.resize_shape)
         image = transform(image).data
-        label = transform(image).data
+        label = transform(label).data
         
         if self.transforms is not None:
             image = self.transforms(image)
-            label = self.transforms(label)
+            #label = self.transforms(label)
+
+        label = torch.squeeze(label).type(torch.LongTensor)
    
         return image, label
     

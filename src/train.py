@@ -4,7 +4,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 from .model import UNet
 from .utils import *
-def train(traindataloader,testdataloader):
+def train(traindataloader,valdataloader):
     # call you model
     model = UNet(channel_in=1, channel_out=3)
     lr = 0.001
@@ -42,6 +42,7 @@ def train(traindataloader,testdataloader):
             label = label.to(device)
             optimiser.zero_grad()
             out = model(data.to(device))
+
 
             loss = criterion(out, label)
             loss.backward()

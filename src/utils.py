@@ -11,7 +11,7 @@ def dice(a, b):
 def mask_out(out):
     """Mask tensor/array with 0 threshold"""
     # Need to binarize the output to be able to calculate dice score
-    return np.argmax(out,axis=1)
+    return torch.argmax(out,dim=1)
 
 def get_dice_arr(out, label):
     """Get dice score for each image in the batch for each mask seperately"""
@@ -19,4 +19,4 @@ def get_dice_arr(out, label):
     return dice(mask_out(out), label)
 
 def get_accuracy(out,label):
-    return np.sum(mask_out(out)==label)/torch.numel(label)
+    return torch.sum(mask_out(out)==label)/torch.numel(label)
