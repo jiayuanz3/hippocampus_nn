@@ -7,8 +7,11 @@ from src.train import train
 
 if __name__ == '__main__':
     file_path = 'Task04_Hippocampus/'
-    traindataloader, valdataloader, testdataloader = generate_data(file_path)
-    #train(traindataloader, valdataloader)
+    train_path = file_path + 'train/'
+    val_path = file_path + 'val/'
+    test_path = file_path + 'test/'
+    traindataloader, valdataloader, testdataloader = generate_data(train_path, val_path, test_path)
+    train(traindataloader, valdataloader)
 
     device = 'cpu'
     traindataloader, valdataloader, testdataloader = generate_data(file_path)
@@ -26,3 +29,6 @@ if __name__ == '__main__':
         plt.show()
 
         raise ValueError('For try only!')
+
+
+
