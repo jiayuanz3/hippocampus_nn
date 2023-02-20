@@ -1,5 +1,6 @@
-# Ignore the data files
+# Ignore the data files and runs results
 Task04_Hippocampus/
+runs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

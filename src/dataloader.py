@@ -47,7 +47,7 @@ class mySegmentationData(object):
     def __len__(self):
         return len(self._images)
     
-def generate_data(file_path,resize_shape=(43,59,47)):
+def generate_data(file_path,resize_shape=(43,59,47),batch_size=32):
     dataset = mySegmentationData(file_path, resize_shape)
     num_sample = len(dataset)
     index = np.arange(0, num_sample)
@@ -69,7 +69,7 @@ def generate_data(file_path,resize_shape=(43,59,47)):
 
     # Now create data loaders (same as before)
     # Now we need to create dataLoaders that will allow to iterate during training
-    batch_size = 4 # create batch-based on how much memory you have and your data size
+    #batch_size = 4 # create batch-based on how much memory you have and your data size
 
     traindataloader = DataLoader(dataset, batch_size=batch_size, sampler=train_sampler, num_workers=0)
     valdataloader = DataLoader(dataset, batch_size=batch_size, sampler=valid_sampler,

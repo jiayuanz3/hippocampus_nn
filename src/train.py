@@ -28,7 +28,7 @@ def train(traindataloader,valdataloader):
 
     # define no. of epochs you want to loop
     epochs = 10
-    log_interval = 7  # for visualising your iterations
+    log_interval = 1  # for visualising your iterations
 
     # New: savining your model depending on your best val score
     best_valid_loss = float('inf')
