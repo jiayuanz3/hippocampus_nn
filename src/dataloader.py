@@ -10,7 +10,7 @@ from torch.utils.data.sampler import SubsetRandomSampler
 r = np.random.RandomState(42)
 
 def write_list_to_file(file_path_name,list_name):
-    with open('file_path_name', 'w') as f:
+    with open(file_path_name, 'w') as f:
         for line in list_name:
             f.write(f"{line}\n")
 def create_list(file_path,data_type):
