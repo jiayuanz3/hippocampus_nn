@@ -13,7 +13,7 @@ if __name__ == '__main__':
               'batch_size':32, # Batch size of training
               'log_interval':5, # Log interval
               'weight_decay':1e-8, # Weight decay for Adam
-              'loss_weight':[1.,100.,100.], # Weight loss for different classes
+              'loss_weight':[1.,5.,10.], # Weight loss for different classes
               'metric':'accuracy', # Validation metrics
 
 
