@@ -8,8 +8,12 @@ from src.train import train
 if __name__ == '__main__':
     weight_1_0 = np.linspace(1.0,5.0,5)
     weight_2_1 = np.linspace(0.5,1.5,5)
-    for i in range(len(weight_1_0)):
-        for j in range(len(weight_2_1)):
+    for i in range(1,len(weight_1_0)):
+        if i == 1:
+            j_start = 3
+        else:
+            j_start = 0
+        for j in range(j_start,len(weight_2_1)):
             config = {'channel_in': 1,  # Input channel = 1 since we're working on grey scale data
                       'channel_out': 3,  # Output channel = 3 since we have three classes
                       'lr': 0.001,  # Learning rate = 0.001
@@ -29,4 +33,4 @@ if __name__ == '__main__':
             save_root_path = 'result/'
             traindataloader, valdataloader, testdataloader = generate_data(train_path, val_path, test_path, config)
             train(traindataloader, valdataloader, config, save_root_path)
-            print('weight_1_0=' + str(weight_1_0[i]) + 'training has completed!')
+            print('weight_1_0=' + str(weight_1_0[i]) +' weight_2_1=' + str(weight_2_1[j]) +  ' training has completed!')
