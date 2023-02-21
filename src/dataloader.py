@@ -7,7 +7,6 @@ import torch
 import torchio as tio
 from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
-r = np.random.RandomState(42)
 
 def write_list_to_file(file_name,list_name):
     with open(file_name, 'w') as f:
@@ -50,7 +49,9 @@ class mySegmentationData(object):
     def __len__(self):
         return len(self._images)
     
-def generate_data(train_path, val_path, test_path, batch_size = 32):
+def generate_data(train_path, val_path, test_path, config):
+
+    batch_size = config['batch_size']
     train = mySegmentationData(train_path)
     val = mySegmentationData(val_path)
     test = mySegmentationData(test_path)
