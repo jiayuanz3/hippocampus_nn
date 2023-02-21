@@ -29,17 +29,17 @@ def train(traindataloader,valdataloader):
     writer = SummaryWriter()
 
     # define no. of epochs you want to loop
-    epochs = 10
+    epochs = 20
     log_interval = 1  # for visualising your iterations
 
     # New: savining your model depending on your best val score
     best_valid_loss = float('inf')
-    ckptFileName = 'UNet_hippocampus_best'+ str(int(datetime.timestamp(datetime.now()))) +'.pt'
+    ckptFileName = 'UNet_hippocampus_best'+ str(datetime.now()).replace(' ','_')[:-7] +'.pt'
     for epoch in range(epochs):
         train_loss, valid_loss, train_dsc, val_dsc = [], [], [], []
 
         for batch_idx, (data, label) in enumerate(traindataloader):
-            # initialise all your gradients to zer
+            # initialise all your gradients to zero
 
             label = label.to(device)
             optimiser.zero_grad()
