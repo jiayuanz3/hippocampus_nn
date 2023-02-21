@@ -9,10 +9,18 @@ from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
 r = np.random.RandomState(42)
 
-def write_list_to_file(file_path_name,list_name):
-    with open(file_path_name, 'w') as f:
+def write_list_to_file(file_name,list_name):
+    with open(file_name, 'w') as f:
         for line in list_name:
             f.write(f"{line}\n")
+
+def read_file_to_list(file_name):
+    list_name = []
+    with open(file_name) as file:
+        for line in file:
+            list_name.append(line.rstrip())
+    return list_name
+
 def create_list(file_path,data_type):
     images_list = sorted(glob.glob(file_path + data_type + '/' + 'images/' + '/*.nii.gz'))
     labels_list = sorted(glob.glob(file_path + data_type + '/' + 'labels/' + '/*.nii.gz'))

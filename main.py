@@ -13,21 +13,22 @@ if __name__ == '__main__':
     # Please add the corresponding function here
 
     # Step 2: Add the train, test data list here.
+    '''
     file_path = 'Task04_Hippocampus/'
     create_list(file_path,data_type='train')
     create_list(file_path, data_type='val')
     create_list(file_path, data_type='test')
-
-
-
     '''
+
+
+    # Step  3: Train!
     file_path = 'Task04_Hippocampus/'
     train_path = file_path + 'train/'
     val_path = file_path + 'val/'
     test_path = file_path + 'test/'
     traindataloader, valdataloader, testdataloader = generate_data(train_path, val_path, test_path)
     train(traindataloader, valdataloader)
-
+    '''
     device = 'cpu'
     traindataloader, valdataloader, testdataloader = generate_data(file_path)
     from src.model import UNet
