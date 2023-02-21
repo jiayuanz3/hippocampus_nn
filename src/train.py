@@ -27,7 +27,7 @@ def train(traindataloader,valdataloader,config,save_root_path='result/'):
     optimiser = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=config['weight_decay'])
     # optimiser = torch.optim.RMSprop(model.parameters(), lr = lr, weight_decay = 1e-8, momentum=0.9)
     # TODO: you can try with different loss function
-    criterion = nn.CrossEntropyLoss(weight=torch.tensor(config['loss_weight']))
+    criterion = nn.CrossEntropyLoss(weight=torch.tensor(config['loss_weight']).float())
     model = model.to(device)
     criterion = criterion.to(device)
 
