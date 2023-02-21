@@ -9,6 +9,17 @@ from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
 r = np.random.RandomState(42)
 
+def write_list_to_file(file_path_name,list_name):
+    with open('file_path_name', 'w') as f:
+        for line in list_name:
+            f.write(f"{line}\n")
+def create_list(file_path,data_type):
+    images_list = sorted(glob.glob(file_path + data_type + '/' + 'images/' + '/*.nii.gz'))
+    labels_list = sorted(glob.glob(file_path + data_type + '/' + 'labels/' + '/*.nii.gz'))
+    write_list_to_file(file_path + data_type + '/' + 'images_list.txt',images_list)
+    write_list_to_file(file_path + data_type + '/' + 'labels_list.txt', labels_list)
+
+
 # Load data and include prepared transform (Remember to apply same transform to both image and label) 
 class mySegmentationData(object):
     def __init__(self, root):
@@ -26,7 +37,7 @@ class mySegmentationData(object):
         image = tio.ScalarImage(self._images[idx])
         label = tio.ScalarImage(self._labels[idx])
    
-        return image, label
+        return image.data, label.data
     
     def __len__(self):
         return len(self._images)

@@ -2,10 +2,25 @@ import torch
 import numpy as np
 print('Torch Version: ',torch.__version__)
 
-from src.dataloader import generate_data
+from src.dataloader import generate_data,create_list
 from src.train import train
 
 if __name__ == '__main__':
+
+    # Step 0: Download data from http://medicaldecathlon.com/
+
+    # Step 1: Reshuffle the data into train, test and validation
+    # Please add the corresponding function here
+
+    # Step 2: Add the train, test data list here.
+    file_path = 'Task04_Hippocampus/'
+    create_list(file_path,data_type='train')
+    create_list(file_path, data_type='val')
+    create_list(file_path, data_type='test')
+
+
+
+    '''
     file_path = 'Task04_Hippocampus/'
     train_path = file_path + 'train/'
     val_path = file_path + 'val/'
@@ -29,6 +44,7 @@ if __name__ == '__main__':
         plt.show()
 
         raise ValueError('For try only!')
+    '''
 
 
 
