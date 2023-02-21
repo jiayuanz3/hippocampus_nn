@@ -1,3 +1,4 @@
+import re
 import os
 import json
 from datetime import datetime
@@ -10,8 +11,8 @@ from .model import UNet
 from .utils import *
 def train(traindataloader,valdataloader,config,save_root_path='result/'):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-    save_path = save_root_path + str(datetime.now()).strip("-_: ")[:-6] + '/'
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    save_path = save_root_path + timestamp + '/'
     if not os.path.exists(save_path):
         os.mkdir(save_path)
 
