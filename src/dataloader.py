@@ -45,7 +45,7 @@ class mySegmentationData(object):
         image = tio.ScalarImage(self._images[idx])
         label = tio.ScalarImage(self._labels[idx])
    
-        return image.data, label.data
+        return image.data, torch.squeeze(label.data)
     
     def __len__(self):
         return len(self._images)
