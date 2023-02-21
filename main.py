@@ -14,7 +14,7 @@ if __name__ == '__main__':
               'log_interval':5, # Log interval
               'weight_decay':1e-8, # Weight decay for Adam
               'loss_weight':[1.,100.,100.], # Weight loss for different classes
-              'val_metric':'accuracy', # Validation metrics
+              'metric':'accuracy', # Validation metrics
 
 
               }
