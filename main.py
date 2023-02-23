@@ -4,6 +4,7 @@ print('Torch Version: ',torch.__version__)
 
 from src.dataloader import generate_data,create_list
 from src.train import train
+from src.analysis import compute_test
 
 if __name__ == '__main__':
     config = {'channel_in':1, # Input channel = 1 since we're working on grey scale data
@@ -29,8 +30,8 @@ if __name__ == '__main__':
     create_list(file_path, data_type='test')
     '''
 
-
-    # Step  3: Train!
+    '''
+    # Step 3: Train!
     file_path = 'Task04_Hippocampus/'
     train_path = file_path + 'train/'
     val_path = file_path + 'val/'
@@ -38,6 +39,15 @@ if __name__ == '__main__':
     save_root_path = 'result/'
     traindataloader, valdataloader, testdataloader = generate_data(train_path, val_path, test_path,config)
     train(traindataloader, valdataloader,config,save_root_path)
+    '''
+
+
+    # Step 4: compute the model for test
+    model_file = 'result/20230222030004/UNet_hippocampus_best.pt'
+    subject_list = ['100206','100307','100408']
+    input_file = ['HCP_sample/'+ subject + '/MNINonLinear/T1w.nii.gz' for subject in subject_list]
+    save_file_path = 'result/'
+    compute_test(model_file, subject_list,input_file,save_file_path)
     '''
     device = 'cpu'
     traindataloader, valdataloader, testdataloader = generate_data(file_path)
