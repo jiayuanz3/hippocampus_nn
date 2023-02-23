@@ -88,7 +88,7 @@ def train(traindataloader,valdataloader,config,save_root_path='result/'):
                         if config['metric'] == 'accuracy':
                             val_metric = get_accuracy(out, label.to(device))
                         elif config['metric'] == 'Dice':
-                            val_metric = get_dice(out,label.to(device))
+                            val_metric = get_dice(out.to(device),label.to(device))
                         else:
                             raise ValueError('Invalid validation metric!')
 
