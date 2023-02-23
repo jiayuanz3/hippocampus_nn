@@ -7,6 +7,7 @@ import torch
 from torch import nn
 from torch.utils.tensorboard import SummaryWriter
 
+
 from .model import UNet
 from .utils import *
 def train(traindataloader,valdataloader,config,save_root_path='result/'):
@@ -65,6 +66,8 @@ def train(traindataloader,valdataloader,config,save_root_path='result/'):
             train_loss.append(loss.item())
             if config['metric'] == 'accuracy':
                 train_metric = get_accuracy(out, label.to(device))
+            elif config['metric'] == 'Dice':
+                train_metric = get_dice(out,label.to(device))
             else:
                 raise ValueError('Invalid validation metric!')
             train_dsc.append(train_metric.mean(axis=0).detach().cpu().numpy())
@@ -84,6 +87,8 @@ def train(traindataloader,valdataloader,config,save_root_path='result/'):
                         # acc_1 = get_dice_arr(out, label.to(device))
                         if config['metric'] == 'accuracy':
                             val_metric = get_accuracy(out, label.to(device))
+                        elif config['metric'] == 'Dice':
+                            val_metric = get_dice(out,label.to(device))
                         else:
                             raise ValueError('Invalid validation metric!')
 
@@ -102,10 +107,10 @@ def train(traindataloader,valdataloader,config,save_root_path='result/'):
 
         # every epoch write the loss and accuracy (these you can see plots on tensorboard)
         writer.add_scalar('UNet/train_loss', np.mean(train_loss), epoch)
-        writer.add_scalar('UNet/train_accuracy', np.mean(train_dsc), epoch)
+        writer.add_scalar('UNet/train_metric', np.mean(train_dsc), epoch)
 
         # New --> add plot for your val loss and val accuracy
         writer.add_scalar('UNet/val_loss', np.mean(valid_loss), epoch)
-        writer.add_scalar('UNet/val_accuracy', np.mean(val_dsc), epoch)
+        writer.add_scalar('UNet/val_metric', np.mean(val_dsc), epoch)
 
     writer.close()
