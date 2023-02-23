@@ -8,8 +8,8 @@ def mask_out(out):
     # Need to binarize the output to be able to calculate dice score
     return torch.argmax(out,dim=1)
 
-def get_dice(out,label):
-    dice = Dice(num_classes=3,ignore_index=0)
+def get_dice(out,label,device):
+    dice = Dice(num_classes=3,ignore_index=0).to(device)
     return dice.forward(mask_out(out),label)
 
 def get_accuracy(out,label):

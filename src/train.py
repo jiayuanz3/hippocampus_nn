@@ -67,7 +67,7 @@ def train(traindataloader,valdataloader,config,save_root_path='result/'):
             if config['metric'] == 'accuracy':
                 train_metric = get_accuracy(out, label.to(device))
             elif config['metric'] == 'Dice':
-                train_metric = get_dice(out.to(device),label.to(device))
+                train_metric = get_dice(out,label.to(device),device=device)
             else:
                 raise ValueError('Invalid validation metric!')
             train_dsc.append(train_metric.mean(axis=0).detach().cpu().numpy())
@@ -88,7 +88,7 @@ def train(traindataloader,valdataloader,config,save_root_path='result/'):
                         if config['metric'] == 'accuracy':
                             val_metric = get_accuracy(out, label.to(device))
                         elif config['metric'] == 'Dice':
-                            val_metric = get_dice(out.to(device),label.to(device))
+                            val_metric = get_dice(out,label.to(device),device=device)
                         else:
                             raise ValueError('Invalid validation metric!')
 
